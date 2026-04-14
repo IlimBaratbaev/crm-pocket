@@ -3,7 +3,7 @@ FROM node:20-alpine
 WORKDIR /app
 
 # Install build deps for native modules (Baileys uses bufferutil, utf-8-validate)
-RUN apk add --no-cache python3 make g++
+RUN apk add --no-cache python3 make g++ git
 
 COPY package*.json ./
 RUN npm install
