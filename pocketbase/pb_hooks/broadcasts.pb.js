@@ -1,7 +1,7 @@
 /// <reference path="../pb_data/types.d.ts" />
 
 // Trigger WhatsApp service to send broadcast when status is set to "sending"
-onRecordAfterUpdateRequest((e) => {
+onRecordAfterUpdateSuccess((e) => {
   const record = e.record;
   if (record.get("status") !== "sending") return;
 
