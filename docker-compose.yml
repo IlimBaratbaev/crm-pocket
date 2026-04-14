@@ -6,15 +6,16 @@ services:
     restart: unless-stopped
     volumes:
       - ./pocketbase/pb_data:/pb/pb_data
-      - ./pocketbase/pb_migrations:/pb/pb_migrations:ro
-      - ./pocketbase/pb_hooks:/pb/pb_hooks:ro
+      - ./pocketbase/pb_migrations:/pb/pb_migrations
+      - ./pocketbase/pb_hooks:/pb/pb_hooks
     env_file: .env
     environment:
       - WA_SERVICE_URL=http://whatsapp:3001
       - WA_SERVICE_SECRET=${WA_SERVICE_SECRET}
     entrypoint: >
-      sh -c "pocketbase superuser upsert $${PB_ADMIN_EMAIL} $${PB_ADMIN_PASSWORD} 2>/dev/null || true &&
-             pocketbase serve --http=0.0.0.0:8090"
+      sh -c "rm -f /pb/pb_migrations/types.d.ts /pb/pb_migrations/*.db &&
+             pocketbase superuser upsert $${PB_ADMIN_EMAIL} $${PB_ADMIN_PASSWORD} --dir=/pb/pb_data --migrationsDir=/pb/pb_migrations --hooksDir=/pb/pb_hooks 2>/dev/null || true &&
+             pocketbase serve --http=0.0.0.0:8090 --dir=/pb/pb_data --migrationsDir=/pb/pb_migrations --hooksDir=/pb/pb_hooks"
     expose:
       - "8090"
     healthcheck:
