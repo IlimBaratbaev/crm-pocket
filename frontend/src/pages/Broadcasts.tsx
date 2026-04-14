@@ -22,7 +22,7 @@ export default function Broadcasts() {
     queryFn: () => pb.collection("broadcasts").getFullList({ sort: "-created" }),
     refetchInterval: (query) => {
       const data = query.state.data;
-      const hasSending = Array.isArray(data) && data.some((b) => (b as { status: string }).status === "sending");
+      const hasSending = Array.isArray(data) && data.some((b) => (b as unknown as { status: string }).status === "sending");
       return hasSending ? 3000 : false;
     },
   });
