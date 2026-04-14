@@ -1,0 +1,21 @@
+# PocketBase runtime data
+pocketbase/pb_data/
+
+# WhatsApp session
+whatsapp-service/auth_info/
+
+# Node
+node_modules/
+dist/
+build/
+
+# Env
+.env
+
+# Logs
+*.log
+npm-debug.log*
+
+# OS
+.DS_Store
+Thumbs.db
