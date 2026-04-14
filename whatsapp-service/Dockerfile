@@ -6,9 +6,7 @@ WORKDIR /app
 RUN apk add --no-cache python3 make g++
 
 COPY package*.json ./
-RUN npm ci --omit=dev || true
-# Install all deps for build then prune
-RUN npm ci
+RUN npm install
 
 COPY tsconfig.json ./
 COPY src ./src
