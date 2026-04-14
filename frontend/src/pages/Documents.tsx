@@ -63,7 +63,7 @@ export default function Documents() {
   }
 
   function getFileUrl(doc: { id: string; collectionId: string; file: string }) {
-    return pb.files.getURL(doc, doc.file);
+    return pb.files.getUrl(doc, doc.file);
   }
 
   return (
@@ -161,7 +161,7 @@ export default function Documents() {
                     <td className="px-5 py-3 text-gray-500">{new Date(doc.created).toLocaleDateString("ru-RU")}</td>
                     <td className="px-5 py-3">
                       <div className="flex items-center gap-3 justify-end">
-                        <a href={getFileUrl(doc as { id: string; collectionId: string; file: string })} target="_blank" rel="noreferrer" className="text-brand-600 hover:text-brand-700">
+                        <a href={getFileUrl(doc as unknown as { id: string; collectionId: string; file: string })} target="_blank" rel="noreferrer" className="text-brand-600 hover:text-brand-700">
                           <Download size={15} />
                         </a>
                         <button
