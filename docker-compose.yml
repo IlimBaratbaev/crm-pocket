@@ -6,11 +6,12 @@ services:
     restart: unless-stopped
     volumes:
       - ./pocketbase/pb_data:/pb/pb_data
-      - ./pocketbase/pb_migrations:/pb/pb_migrations
-      - ./pocketbase/pb_hooks:/pb/pb_hooks
+      - ./pocketbase/pb_migrations:/pb/pb_migrations:ro
+      - ./pocketbase/pb_hooks:/pb/pb_hooks:ro
     environment:
       - WA_SERVICE_URL=http://whatsapp:3001
       - WA_SERVICE_SECRET=${WA_SERVICE_SECRET}
+    command: ["serve", "--http=0.0.0.0:8090"]
     expose:
       - "8090"
     healthcheck:
