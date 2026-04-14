@@ -12,7 +12,7 @@ services:
     environment:
       - WA_SERVICE_URL=http://whatsapp:3001
       - WA_SERVICE_SECRET=${WA_SERVICE_SECRET}
-    command: >
+    entrypoint: >
       sh -c "pocketbase superuser upsert $${PB_ADMIN_EMAIL} $${PB_ADMIN_PASSWORD} 2>/dev/null || true &&
              pocketbase serve --http=0.0.0.0:8090"
     expose:
